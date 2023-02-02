@@ -1,0 +1,17 @@
+{
+    // for nodemon
+    "ts-node": {
+      "compilerOptions": {
+        "module": "commonjs"
+      }
+    },
+    "compilerOptions": {
+      "outDir": "./build/",
+      "noImplicitAny": true,
+      "module": "es6",
+      "strict": true,
+      "target": "es5",
+      "allowJs": true,
+      "moduleResolution": "node"
+    }
+  }
