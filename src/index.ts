@@ -1,10 +1,11 @@
-import { conf } from './.app-configure';
 import app from './fastify';
-import { todo } from "./app-todo"
-import { todo2 } from "./app-todo2"
+import { conf } from './.app-configure';
+import { todoA, todoB } from "./app-todo"
 
-todo()
-todo2()
+// By commenting out here, you can make the API unavailable.
+// The unavailable API will return a 404.
+todoA()
+todoB()
 
 app.listen({
   port: 3000,

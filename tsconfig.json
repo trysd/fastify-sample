@@ -16,8 +16,7 @@
   },
   "include": [
     "src",
-    "jest.setup.js",
-    "src/.app-configure.ts"
+    "jest.setup.js"
   ],
   "exclude": [
     "node_modules",

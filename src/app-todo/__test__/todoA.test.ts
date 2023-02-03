@@ -1,13 +1,13 @@
-import { conf } from '../.app-configure';
-import { tester } from '../test-equip/test-equip';
-import { todo } from './';
+import { conf } from '../../.app-configure';
+import { tester } from '../../test-equip/test-equip';
+import { todoA as todoA } from '..';
 
-tester((req) => todo().inject(req), [
+tester((req) => todoA().inject(req), [
   {
     name: 'Normal flow basic',
     request: {
       method: 'POST',
-      url: conf.baseAPIPath + '/todo',
+      url: conf.baseAPIPath + '/todo-a',
       headers: {
         Authorization: 'abc123'
       },
