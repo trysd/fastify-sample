@@ -37,3 +37,44 @@ $ npm run test
 ## host name
 
 The implementation has been set to specify the host as 0.0.0.0, depending on the environment. If the first argument at run time is given as 'dev', it will become 127.0.0.1. If modification is necessary, change src/index.ts.
+
+# debug
+
+"sourceMap": true is required in the compilerOptions of tsconfig.json.  
+Start debugging in VSCode after writing the following file.  
+  
+If the first debugging run stops, run it again to start debugging.
+
+## .vscode/launch.json
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch TypeScript",
+      "preLaunchTask": "Compile TypeScript",
+      "cwd": "${workspaceFolder}",
+      "program": "${file}"
+    }
+  ]
+}
+```
+
+## .vscode/tasks.json
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile TypeScript",
+      "type": "typescript",
+      "tsconfig": "tsconfig.json",
+      "problemMatcher": ["$tsc"]
+    }
+  ]
+}
+```
