@@ -2,18 +2,20 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  mode: 'production', // development
+  // devtool: "source-map",
+
+  mode: 'production',
   optimization: {
     usedExports: true,
   },
-
-  // devtool: "source-map",
+  
+  // To "obfuscate," comment out the following.
   optimization: {
     minimize: false
   },
   
   target: 'node',
-  externals: (context, request, callback) => {
+  externals: ({context, request}, callback) => {
     if (request === 'fastify') return callback(null, 'commonjs ' + request);
     callback();
   },
