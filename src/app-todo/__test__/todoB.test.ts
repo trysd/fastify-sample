@@ -11,6 +11,8 @@ tester((req) => todoB().inject(req), [
   {
     name: 'normal flow basic',
     before: () => {
+      // If the method returns a promise, wrap the argument of 
+      // mockReturnValue with Promise.resolve(Set the value here.).
       spy = jest.spyOn(todoService, 'forMockTest').mockReturnValue('{"hello":"todo-b"}');
     },
     after: () => {
