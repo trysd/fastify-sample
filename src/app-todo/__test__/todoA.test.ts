@@ -1,5 +1,5 @@
 import { conf } from '../../.app-configure';
-import { tester } from '../../test-equip/test-equip';
+import { tester } from '../../test-equip/test.equip';
 import { todoA as todoA } from '..';
 
 tester((req) => todoA().inject(req), [
@@ -18,7 +18,7 @@ tester((req) => todoA().inject(req), [
         name: 'a'
       }
     },
-    response: {
+    expectedValue: {
       'body': '{"date":"2023-02-02","token":"123456","name":"a","mail":"a@a.a"}',
       'statusCode': 200
     }

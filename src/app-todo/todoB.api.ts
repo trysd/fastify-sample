@@ -1,14 +1,15 @@
 import { conf } from '../.app-configure';
 import app from '../fastify'
 
+import { TodoService } from './todo.service';
+const todoService = TodoService.Instance();
+
 // request example
-//
-// URL:
-//   http://localhost:3000/test/v1/todo-b
-//
+// http://localhost:3000/test/v1/todo-b
 export const todoB =  () => {
   app.get(conf.baseAPIPath + '/todo-b', async function (request, reply) {
-    return { hello: 'todo-b' }
+    const res = todoService.forMockTest();
+    return res
   })
   return app;
 }

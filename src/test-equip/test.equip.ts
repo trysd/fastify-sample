@@ -19,7 +19,7 @@ export type ResourceItem = {
    * among other things. The expected response is used as a comparison point to
    * determine if the actual response received meets the desired outcome.
    */
-  response: { [keys: string]: number | string },
+  expectedValue: { [keys: string]: number | string },
   /**
    * before function
    * You can specify a callback function to be run before the test is carried out.
@@ -52,24 +52,29 @@ export const tester = (
 ) => {
   resourceItem.forEach(r => {
 
-    if (r.before !== undefined) r.before();
+    if (r.before !== undefined) beforeEach(() => {
+      if (r.before !== undefined) r.before()
+    })
+
     test(r.name, async () => {
       // const response = await app.inject(r.request)
       const response = await requester(r.request)
-      Object.keys(r.response).forEach(key => {
+      Object.keys(r.expectedValue).forEach(key => {
         switch (key) {
           case 'statusCode': {
-            expect(response.statusCode).toEqual(r.response[key]);
+            expect(response.statusCode).toEqual(r.expectedValue[key]);
             break
           }
           case 'body': {
-            expect(response.body).toEqual(r.response[key]);
+            expect(response.body).toEqual(r.expectedValue[key]);
             break
           }
         }
       });
     });
 
-    if (r.after !== undefined) r.after();
+    if (r.after !== undefined) afterEach(() => {
+      if (r.after !== undefined) r.after();
+    })
   })
 }
