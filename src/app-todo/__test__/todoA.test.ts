@@ -1,8 +1,8 @@
 import { conf } from '../../.app-configure';
 import { tester } from '../../test-equip/test.equip';
-import { todoA as todoA } from '..';
+import { todoA } from '..';
 
-tester((req) => todoA().inject(req), [
+tester(todoA, [
   {
     name: 'Normal flow basic',
     request: {

@@ -1,4 +1,5 @@
-import { InjectOptions, LightMyRequestResponse } from 'fastify'
+import { FastifyInstance, InjectOptions, LightMyRequestResponse } from 'fastify'
+// import fastify from 'fastify'
 
 /**
  * An interface that encompasses the resources for sending.
@@ -47,18 +48,16 @@ export type ResourceItem = {
  * @param resourceItem An object that contains the resources for sending
  */
 export const tester = (
-  requester: (req: InjectOptions) => Promise<LightMyRequestResponse>,
+  api: () => FastifyInstance,
   resourceItem: ResourceItem[]
 ) => {
-  resourceItem.forEach(r => {
+  const fastify = api();
 
-    if (r.before !== undefined) beforeEach(() => {
-      if (r.before !== undefined) r.before()
-    })
-
-    test(r.name, async () => {
-      // const response = await app.inject(r.request)
-      const response = await requester(r.request)
+  resourceItem.forEach(async r => {
+    await test(r.name, async () => {
+      if (r.before) r.before()
+      const response = await fastify.inject(r.request)
+      if (r.after) r.after();
       Object.keys(r.expectedValue).forEach(key => {
         switch (key) {
           case 'statusCode': {
@@ -72,9 +71,5 @@ export const tester = (
         }
       });
     });
-
-    if (r.after !== undefined) afterEach(() => {
-      if (r.after !== undefined) r.after();
-    })
   })
 }
