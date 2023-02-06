@@ -9,7 +9,6 @@ const todoService = TodoService.Instance();
 export const todoB =  () => {
   app.get(conf.baseAPIPath + '/todo-b', async function (request, reply) {
     const res = todoService.forMockTest();
-    console.log("res:", res)
     return res
   })
   return app;

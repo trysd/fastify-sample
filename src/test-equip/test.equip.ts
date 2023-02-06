@@ -1,5 +1,4 @@
 import { FastifyInstance, InjectOptions, LightMyRequestResponse } from 'fastify'
-// import fastify from 'fastify'
 
 /**
  * An interface that encompasses the resources for sending.
@@ -42,7 +41,7 @@ export type ResourceItem = {
  * following the example of todo.
  * 
  * Usage
- *   tester((req) => todoB().inject(req), [{resource}, {resource}]
+ *   tester(todoA, [{resource}, {resource}]
  * 
  * @param requester A callback function to send test requests to fastify
  * @param resourceItem An object that contains the resources for sending
